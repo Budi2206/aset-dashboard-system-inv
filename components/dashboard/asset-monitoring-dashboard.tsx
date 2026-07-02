@@ -19,9 +19,26 @@ function Pill({
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({
+  label,
+  value,
+  maxWidth,
+  height,
+}: {
+  label: string;
+  value: string;
+  maxWidth?: string;
+  height?: string;
+}) {
   return (
-    <div className="flex flex-col items-start gap-3 rounded-xl bg-[#343131] p-3 sm:p-4">
+    <div
+      className="flex flex-col items-start gap-3 rounded-xl bg-[#343131] p-3 sm:p-4"
+      style={{
+        ...(maxWidth && { maxWidth }),
+        ...(height && { height }),
+        ...(maxWidth || height ? { flexGrow: 0 } : {}),
+      }}
+    >
       <span className="text-xs font-bold text-white sm:text-sm">{label}</span>
       <span className="text-sm font-bold text-white sm:text-base">
         {value}
@@ -80,8 +97,8 @@ export function AssetMonitoringDashboard() {
 
           <div className="flex flex-col items-stretch gap-8 lg:flex-row lg:gap-[61px]">
             <div className="grid w-full grid-cols-2 gap-[15px] lg:w-[500px] lg:flex-shrink-0">
-              <StatCard label="LONGITUDE" value="106,827153" />
-              <StatCard label="LATITUDE" value="-6,175392" />
+              <StatCard label="LONGITUDE" value="106,827153" maxWidth="345px" height="100px" />
+              <StatCard label="LATITUDE" value="-6,175392" maxWidth="325px" height="100px" />
             </div>
             <div className="aspect-[380/206] w-full lg:w-[380px] lg:flex-shrink-0">
               <Placeholder label="CHART" />
